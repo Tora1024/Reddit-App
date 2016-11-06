@@ -34,5 +34,12 @@
     "react-redux": "^4.0.0",
     "react-router": "^2.0.1",
     "redux": "^3.0.4"
+  },
+  "eslintConfig": {
+    "extends": "rallycoding",
+    "env": {
+      "es6": true,
+      "browser": true
+    }
   }
 }

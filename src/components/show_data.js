@@ -23,7 +23,7 @@ class PostsIndex extends Component {
 				);
 			}
 		});*/
-		console.log(this.props.posts.data.children);
+		console.log(this.props.posts.children);
 		return <div>listo</div>;
 	}
 

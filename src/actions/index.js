@@ -13,9 +13,4 @@ export function fetchPosts() {
 			dispatch({ type: FETCH_POSTS, payload: data });
 		});
 	};
-
-	/*return ({
-		type: FETCH_POSTS,
-		payload: request
-	});*/
 }

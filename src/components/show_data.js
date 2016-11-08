@@ -3,28 +3,22 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index';
 
 class PostsIndex extends Component {
-	componentWillMount() {
-		this.props.fetchPosts();
-	}
 
 	renderPosts() {
 		if (Object.keys(this.props.posts).length === 0) {
 			return (
-				<div>loading...</div>
+				<ul />
 			);
-		} 
-		/*return this.props.posts.map((post) => {
-			if (post.title !== null && post.categories !== null && post.content !== null) {
-				return (
-					<li className="list-group-item" key={post.id}>
-							<span className="pull-xs-right">{post.categories}</span>
-							<strong>{post.title}</strong>
-					</li>
-				);
-			}
-		});*/
+		}
 		console.log(this.props.posts.children);
-		return <div>listo</div>;
+		return this.props.posts.children.map((post) => {
+			return (
+					<li className="list-group-item" key={post.data.id}>
+							<span className="pull-xs-right">{post.data.author}</span>
+							<strong>{post.data.title}</strong>
+					</li>
+			);
+		});
 	}
 
 	render() {

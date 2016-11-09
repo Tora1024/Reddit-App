@@ -3,7 +3,23 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/index';
 
 class PostsIndex extends Component {
+	constructor(props) {
+		super(props);
 
+		this.state = { imgError: false };
+		this.onImageError = this.onImageError.bind(this);
+		this.renderImage = this.renderImage.bind(this);
+	}
+
+	onImageError() {
+		this.setState({ imgError: true });
+	}
+
+	renderImage(post) {
+		if (!this.state.imgError) {
+			return <img alt={post.data.title} src={post.data.thumbnail} onError={this.onImageError} />;
+		}
+	}
 
 	renderPosts() {
 		if (Object.keys(this.props.posts).length === 0) {
@@ -14,7 +30,8 @@ class PostsIndex extends Component {
 		console.log(this.props.posts.children);
 		return this.props.posts.children.map((post) => 
 			<li className="list-group-item" key={post.data.id}>
-				<span className="pull-xs-right">{post.data.author}</span>
+				{ this.renderImage(post) }
+				<span className="pull-xs-right">by: {post.data.author}</span>
 				<strong>{post.data.title}</strong>
 			</li>
 		);

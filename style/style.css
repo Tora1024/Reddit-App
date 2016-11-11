@@ -1,0 +1,13 @@
+.container, .data-container {
+	margin-top: 20px; 
+}
+
+.logo-image {
+	width: 30px;
+	float: left;
+	margin-right: 10px; 
+}
+
+.logo-title {
+	float: left;
+}

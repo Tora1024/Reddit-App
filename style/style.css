@@ -19,6 +19,7 @@
 .post-description {
 	float: left;
 	margin-left: 10px;
+	width: 60%;
 }
 
 .post-image {

@@ -12,14 +12,25 @@ class PostsIndex extends Component {
 		}
 		console.log(this.props.posts.children);
 		return this.props.posts.children.map((post) => 
-			<li className="list-group-item" key={post.data.id}>
+			<li className="list-group-item clearfix" key={post.data.id}>
 				<ReactImageFallback 
 					src={post.data.thumbnail}
 					initialImage="../../images/load.gif"
 					fallbackImage="../../images/blanc.png"
+					className="post-image"
 				/>
-				<span className="pull-xs-right">by: {post.data.author}</span>
-				<strong>{post.data.title}</strong>
+				<div className="post-description">
+					<strong>{post.data.title}</strong>
+					<p className="">by: {post.data.author}</p>
+				</div>
+				<a 
+					href={`mailto:?subject=I wanted you to see this funny reddit post
+						&body=Check this out! ${post.data.url}`}
+					title="Share by Email"
+					className="pull-xs-right"
+				>
+					<img alt="e-mail" src="../../images/mail.png" />
+				</a>
 			</li>
 		);
 	}

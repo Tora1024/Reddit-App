@@ -16,7 +16,7 @@ class PostsIndex extends Component {
 				<ReactImageFallback 
 					src={post.data.thumbnail}
 					initialImage="../../images/load.gif"
-					fallbackImage="../../images/load.gif"
+					fallbackImage="../../images/blanc.png"
 				/>
 				<span className="pull-xs-right">by: {post.data.author}</span>
 				<strong>{post.data.title}</strong>

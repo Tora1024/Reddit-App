@@ -5,12 +5,22 @@ import { fetchPosts } from '../actions/index';
 
 class PostsIndex extends Component {
 	renderPosts() {
-		if (Object.keys(this.props.posts).length === 0) {
+		if (Object.keys(this.props.posts).length === 0 && !this.props.error) {
 			return (
-				<ul />
+				<div>Loading...</div>
 			);
 		}
-		console.log(this.props.posts.children);
+		if (this.props.error) {
+			console.log(this.props.error.message);
+			return (
+				<div className="error-container">
+					<h3 className="text-danger">Opps! There was an error in your search</h3>
+					<img className="error-image" alt="error!" src="../../images/error.gif" />
+					<p>Most likey it is has to do with the category not existing, or being private.</p>
+					<p>Don't panic tho, go ahead and pick another category!</p>
+				</div>
+			);
+		}
 		return this.props.posts.children.map((post) => 
 			<li className="list-group-item clearfix" key={post.data.id}>
 				<ReactImageFallback 
@@ -47,7 +57,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-	return { posts: state.posts.all };
+	return { posts: state.posts.all, error: state.posts.error };
 }
 
 export default connect(mapStateToProps, { fetchPosts })(PostsIndex);

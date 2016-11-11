@@ -29,3 +29,12 @@
 .clearfix {
 	overflow: auto;
 }
+
+.error-container {
+	text-align: center;
+}
+
+.error-image {
+	width: 50%;
+	margin: 0 auto;
+}

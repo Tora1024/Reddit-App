@@ -12,6 +12,10 @@ class SearchBar extends Component {
 		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
+	componentWillMount() {
+		this.props.fetchPosts('cats');
+	}
+
 	onInputChange(event) {
 		this.setState({ term: event.target.value });
 	}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export const FETCH_POSTS = 'FETCH_POSTS';
+export const ERROR = 'ERROR';
 
 const ROOT_URL = 'https://www.reddit.com/r/';
 
@@ -10,6 +11,8 @@ export function fetchPosts(category) {
 	return (dispatch) => {
 		request.then(({ data }) => {
 			dispatch({ type: FETCH_POSTS, payload: data });
+		}).catch((error) => {
+			dispatch({ type: ERROR, payload: error });
 		});
 	};
 }

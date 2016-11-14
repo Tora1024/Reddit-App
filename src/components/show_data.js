@@ -17,13 +17,29 @@ class PostsIndex extends Component {
 
     closeModal() { this.setState({ open: false }); }
 
+    renderImages(data) {
+		if (Object.prototype.hasOwnProperty.call(data, 'preview')) {
+			return data.preview.images.map(
+			(image) => 
+				<ReactImageFallback
+					key={image.source.url}
+					src={image.source.url}
+					initialImage="../../images/load.gif"
+					fallbackImage="../../images/blanc.png"
+					className="post-item-image"
+				/>
+			);
+		}
+    }
+
 	renderPosts() {
-		if (Object.keys(this.props.posts).length === 0 && !this.props.error) {
+		if (Object.keys(this.props.posts).length === 0 && this.props.error.length === 0) {
 			return (
 				<div>Loading...</div>
 			);
 		}
-		if (this.props.error) {
+		if (this.props.error.length > 0) {
+			console.log('on error', this.props.error);
 			return (
 				<div className="error-container">
 					<h3 className="text-danger">Opps! There was an error in your search</h3>
@@ -33,6 +49,7 @@ class PostsIndex extends Component {
 				</div>
 			);
 		}
+		console.log('children', this.props.posts.children);
 		return this.props.posts.children.map((post) => 
 			<li 
 				onClick={this.openModal} 
@@ -66,12 +83,7 @@ class PostsIndex extends Component {
 					<button className="post-item-btn-close" onClick={this.closeModal}>x</button>
 					<h3>Author: {post.data.author}</h3>
 					<p>{post.data.title}</p>
-					<ReactImageFallback 
-						src={post.data.preview.images[0].source.url}
-						initialImage="../../images/load.gif"
-						fallbackImage="../../images/blanc.png"
-						className="post-item-image"
-					/>
+					{ this.renderImages(post.data) }
 				</Modal>
 			</li>
 		);

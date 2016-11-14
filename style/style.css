@@ -38,3 +38,50 @@
 	width: 50%;
 	margin: 0 auto;
 }
+
+.post-item {
+	cursor: pointer;
+}
+
+.post-item-image {
+	width: 50%;
+}
+
+.post-item-btn-close {
+	position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 5px;
+
+}
+
+form .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-child) > .btn-group {
+	z-index: 0;
+}
+
+.input-group .form-control:not(:last-child), .input-group-addon:not(:last-child), .input-group-btn:not(:last-child) > .btn, .input-group-btn:not(:last-child) > .btn-group > .btn, .input-group-btn:not(:last-child) > .dropdown-toggle, .input-group-btn:not(:first-child) > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:not(:first-child) > .btn-group:not(:last-child) > .btn {
+	z-index: 0;
+}
+
+.ModalClass {
+    position: absolute;
+    top: 100px;
+    left: 20%;
+    right: 20%;
+    bottom: 100px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+  }
+
+  .OverlayClass {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.04);
+  }

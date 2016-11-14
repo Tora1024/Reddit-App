@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactImageFallback from 'react-image-fallback';
+import Modal from 'react-modal';
 import { fetchPosts } from '../actions/index';
 
 class PostsIndex extends Component {
+	constructor() {
+      super();
+
+      this.state = { open: false }; 
+      this.openModal = this.openModal.bind(this);
+      this.closeModal = this.closeModal.bind(this);
+    }
+
+    openModal() { this.setState({ open: true }); }
+
+    closeModal() { this.setState({ open: false }); }
+
 	renderPosts() {
 		if (Object.keys(this.props.posts).length === 0 && !this.props.error) {
 			return (
@@ -21,8 +34,13 @@ class PostsIndex extends Component {
 				</div>
 			);
 		}
+		console.log(this.props.posts.children);
 		return this.props.posts.children.map((post) => 
-			<li className="list-group-item clearfix" key={post.data.id}>
+			<li 
+				onClick={this.openModal} 
+				className="list-group-item clearfix post-item" 
+				key={post.data.id}
+			>
 				<ReactImageFallback 
 					src={post.data.thumbnail}
 					initialImage="../../images/load.gif"
@@ -41,6 +59,22 @@ class PostsIndex extends Component {
 				>
 					<img alt="e-mail" src="../../images/mail.png" />
 				</a>
+				<Modal
+					className="ModalClass"
+					overlayClassName="OverlayClass"
+					isOpen={this.state.open}
+					onRequestClose={this.closeModal}
+				>
+					<button className="post-item-btn-close" onClick={this.closeModal}>x</button>
+					<h3>Author: {post.data.author}</h3>
+					<p>{post.data.title}</p>
+					<ReactImageFallback 
+						src={post.data.preview.images[0].source.url}
+						initialImage="../../images/load.gif"
+						fallbackImage="../../images/blanc.png"
+						className="post-item-image"
+					/>
+				</Modal>
 			</li>
 		);
 	}

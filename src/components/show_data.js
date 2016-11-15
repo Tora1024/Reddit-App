@@ -25,7 +25,6 @@ class PostsIndex extends Component {
 			);
 		}
 		if (this.props.error.length > 0) {
-			console.log('on error', this.props.error);
 			return (
 				<div className="error-container">
 					<h3 className="text-danger">Opps! There was an error in your search</h3>
@@ -35,7 +34,7 @@ class PostsIndex extends Component {
 				</div>
 			);
 		}
-		//console.log(modalData());
+		//console.log(this.props.posts.children);
 		return this.props.posts.children.map((post, index) => 
 			<li 
 				onClick={this.openModal.bind(this, index)} 

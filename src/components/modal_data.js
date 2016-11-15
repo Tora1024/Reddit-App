@@ -16,7 +16,6 @@ export class ModalData extends Component {
 		}
     }
 
-
 	render() {
 		return (
 			<div>

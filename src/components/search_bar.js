@@ -13,7 +13,7 @@ class SearchBar extends Component {
 	}
 
 	componentWillMount() {
-		this.props.fetchPosts('nintendo');
+		this.props.fetchPosts('cats');
 	}
 
 	onInputChange(event) {

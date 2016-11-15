@@ -35,7 +35,7 @@
 }
 
 .error-image {
-	width: 50%;
+	width: 40%;
 	margin: 0 auto;
 }
 
@@ -83,5 +83,5 @@ form .input-group-btn:not(:first-child) > .btn, .input-group-btn:not(:first-chil
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.04);
+    background-color: rgba(255, 255, 255, 0.6);
   }

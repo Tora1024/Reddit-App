@@ -3,34 +3,20 @@ import { connect } from 'react-redux';
 import ReactImageFallback from 'react-image-fallback';
 import Modal from 'react-modal';
 import { fetchPosts } from '../actions/index';
+import { ModalData } from './modal_data';
 
 class PostsIndex extends Component {
 	constructor() {
       super();
 
-      this.state = { open: false }; 
+      this.state = { open: false, index: null }; 
       this.openModal = this.openModal.bind(this);
       this.closeModal = this.closeModal.bind(this);
     }
 
-    openModal() { this.setState({ open: true }); }
+    openModal(i) { this.setState({ open: true }); this.setState({ index: i }); }
 
     closeModal() { this.setState({ open: false }); }
-
-    renderImages(data) {
-		if (Object.prototype.hasOwnProperty.call(data, 'preview')) {
-			return data.preview.images.map(
-			(image) => 
-				<ReactImageFallback
-					key={image.source.url}
-					src={image.source.url}
-					initialImage="../../images/load.gif"
-					fallbackImage="../../images/blanc.png"
-					className="post-item-image"
-				/>
-			);
-		}
-    }
 
 	renderPosts() {
 		if (Object.keys(this.props.posts).length === 0 && this.props.error.length === 0) {
@@ -43,16 +29,16 @@ class PostsIndex extends Component {
 			return (
 				<div className="error-container">
 					<h3 className="text-danger">Opps! There was an error in your search</h3>
-					<img className="error-image" alt="error!" src="../../images/error.gif" />
 					<p>Most likey it is has to do with the category not existing, or being private.</p>
 					<p>Don't panic tho, go ahead and pick another category!</p>
+					<img className="error-image" alt="error!" src="../../images/error.gif" />
 				</div>
 			);
 		}
-		console.log('children', this.props.posts.children);
-		return this.props.posts.children.map((post) => 
+		//console.log(modalData());
+		return this.props.posts.children.map((post, index) => 
 			<li 
-				onClick={this.openModal} 
+				onClick={this.openModal.bind(this, index)} 
 				className="list-group-item clearfix post-item" 
 				key={post.data.id}
 			>
@@ -74,17 +60,6 @@ class PostsIndex extends Component {
 				>
 					<img alt="e-mail" src="../../images/mail.png" />
 				</a>
-				<Modal
-					className="ModalClass"
-					overlayClassName="OverlayClass"
-					isOpen={this.state.open}
-					onRequestClose={this.closeModal}
-				>
-					<button className="post-item-btn-close" onClick={this.closeModal}>x</button>
-					<h3>Author: {post.data.author}</h3>
-					<p>{post.data.title}</p>
-					{ this.renderImages(post.data) }
-				</Modal>
 			</li>
 		);
 	}
@@ -95,6 +70,15 @@ class PostsIndex extends Component {
 				<ul className="list-group">
 					{this.renderPosts()}
 				</ul>
+				<Modal
+					className="ModalClass"
+					overlayClassName="OverlayClass"
+					isOpen={this.state.open}
+					onRequestClose={this.closeModal}
+				>
+					<button className="post-item-btn-close" onClick={this.closeModal}>x</button>
+					<ModalData index={this.state.index} data={this.props.posts.children} />
+				</Modal>
 			</div>
 		);
 	}
